@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <title>Show</title>
+</head>
+<body>
+  <h1>Flights</h1>
+  <a href="/flights/<%= flight._id %>/edit">Edit Flight</a>
+  <h2>Airline: <%= flight.airline %></h2>
+  <h2>Airport: <%= flight.airport %></h2>
+  <h2>Flight #<%= flight.flightNo %></h2>
+  <h2>Departure: <%= flight.departs %></h2>
+  <h3><%= flight.text %></h3>
+  <a href="/flights">Go back</a>
+</body>
+</html>
