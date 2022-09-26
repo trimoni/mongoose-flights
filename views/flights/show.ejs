@@ -25,6 +25,7 @@
   <table>
     <thead>
       <tr>
+        <th>Delete</th>
         <th>Date</th>
         <th>Seat</th>
         <th>Price</th>
@@ -33,16 +34,17 @@
     <tbody>
       <% flight.tickets.forEach(function(ticket) { %>
         <tr>
-          <form
-          action="/flights/tickets<%= flight._id %>?_method=DELETE"
-          class="delete-flight"
-          method="POST"
-        >
-          <button type="submit">X</button>
-        </form>
+          <td><form
+            action="/flights/<%= flight._id %>/tickets/<%= ticket._id%>?_method=DELETE"
+            class="delete-flight"
+            method="POST"
+          >
+            <button type="submit">X</button>
+          </form></td>
           <td><%= ticket.createdAt.toLocaleDateString() %></td>
           <td><%= ticket.seat %></td>
           <td><%= ticket.price %></td>
+          
         </tr>
       <% }) %>
     </tbody>
