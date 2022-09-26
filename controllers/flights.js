@@ -49,16 +49,17 @@ function deleteFlights(req, res) {
   })
 }
 
-function show (req, res) {
+function show(req, res) {
   Flight.findById(req.params.id)
   .then(flight => {
     res.render('flights/show', {
-      flight: flight
+      title: 'Flight Detail',
+      flight: flight,
     })
   })
   .catch(err => {
     console.log(err)
-    res.redirect('/flights')
+    res.redirect('/')
   })
 }
 
@@ -66,7 +67,8 @@ function edit(req, res) {
   Flight.findById(req.params.id)
   .then(flight => {
     res.render('flights/edit', {
-      flight: flight
+      flight: flight,
+      title: 'Edit Flight',
     })
   })
   .catch(err => {
@@ -87,6 +89,43 @@ function update(req, res) {
   })
 }
 
+function createTickets(req, res){
+  Flight.findById(req.params.id)
+  .then(flight => {
+    flight.tickets.push(req.body)
+    flight.save()
+    .then(() => {
+      res.redirect(`/flights/${flight._id}`)
+    })
+    .catch(err => {
+      console.log(err)
+      res.redirect('/')
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/')
+  })
+}
+
+function deleteTickets(req, res) {
+  Flight.findById(req.params.id)
+  .then(flight => {
+    flight.tickets.remove(req.body)
+    .then(() => {
+      res.redirect(`/flights/${flight._id}`)
+    })
+    .catch(err => {
+      console.log(err)
+      res.redirect('/')
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect('/')
+  })
+}
+
 export {
   index,
   newFlights as new,
@@ -95,4 +134,6 @@ export {
   show,
   edit,
   update,
+  createTickets,
+  deleteTickets,
 }
