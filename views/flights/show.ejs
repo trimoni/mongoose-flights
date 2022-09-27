@@ -9,8 +9,22 @@
   <h2>Airport: <%= flight.airport %></h2>
   <h2>Flight #<%= flight.flightNo %></h2>
   <h2>Departure: <%= flight.departs %></h2>
-  <h3><%= flight.text %></h3>
-<main>
+  <h2><%= flight.text %></h2>
+  <!-- start here -->
+  <div>Meals:</div>
+  <ul>
+    <% flight.meals.forEach(meal => { %>
+      <li><%= meal.name %></li>
+    <% }) %>
+  </ul>
+  <form id="add-per-to-cast" action="/flights/<%= flight._id %>/meals" method="POST">
+    <select name="mealsId">
+      <% meals.forEach(meal => { %>
+        <option value="<%= meal._id %>"><%= meal.name %></option>
+      <% }) %>
+    </select>
+    <button type="submit">Add to Meal</button>
+  </form>
 <h2 id="tickets">Tickets</h2>
 <form
   id="add-tickets"
@@ -53,4 +67,5 @@
   <h3 id="tickets-yet">No Tickets Yet</h3>
 <% } %>
 <a href="/flights">Go back</a>
+</main>
 <%- include('../partials/footer') %>
